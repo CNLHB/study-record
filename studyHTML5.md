@@ -22,7 +22,40 @@
 ```
 
 ## 新语义标签
+```html5
+<body>
+	
+	 <!-- <div class="nav"></div>
 
+	 <div class="header"></div>
+
+	 <div class="abc"></div> -->
+
+	 <nav>用来表示导航区域的</nav>
+
+	 <header>头部区域（页眉）</header>
+
+	 <footer></footer>
+
+
+	 <nav></nav>  ==&gt; <div class="bac"></div>
+
+	 <header></header>  <div class="header"></div>
+
+	 <div>没有语义的标签</div>
+
+	 <nav>有语义的标签</nav>
+
+ 
+</body>
+<!-- 兼容低版本浏览器 
+	1、动态创建标签，document.createElement("标签名")
+	2、引入script插件
+	3、[if lte IE 8]
+	<<script src="/javascripts/application.js" type="text/javascript" charset="utf-8" async defer></script>
+	[endif]
+-->
+```
 ### 网页布局结构标签及兼容处理
 
 ```html
