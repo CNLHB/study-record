@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>defineProperty</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="app"></div>
+</body>
+	<script type="text/javascript" charset="utf-8" async defer>
+		var obj = {}
+		Object.defineProperty(obj,'name',{
+			get: function(){
+	           return document.querySelector("#app").innerHTML;
+			},
+			set:function(val) {
+				document.querySelector("#app").innerHTML = val
+			}
+		})
+	  obj.name =  "599"
+	  console.log(obj.name)
+
+	</script>
+</html>
