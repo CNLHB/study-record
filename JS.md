@@ -100,21 +100,25 @@
 
    创建了一个独立布局，盒子里面的子元素的样式不会影响到外面的元素
 
-   生成BFC
+   ##### 生成BFC
 
+   ```js
    1）根元素
    2）float属性不为none
    3）position不为static和relative
    4）overflow不为visible
    5）display为inline-block, table-cell, table-caption, flex, inline-flex
+   ```
 
-   BFC应用
+   
 
+   ##### BFC应用
+
+   ```js
    1）防止外边距重叠。
-
    2）清除浮动的影响
-
    3）防止文字环绕
+   ```
 
    
 
@@ -132,6 +136,7 @@
 
    <!DOCTYPE>并不是一个html标签，它被声明在html文档的第一行，用来告诉web浏览器，我们写的这个html文件基于那个html版本，从而浏览器根据不同版本的规则来编写。
     <!DOCTYPE>必须在文档第一行来声明。如果没有声明，或者声明错误，则浏览器会以怪异模式/兼容模式来解析
+
    在HTML4和HTML5中，声明方式不同。
    在HTML4.01中有三种声明方式，
    **HTML 4.01 Strict**
@@ -142,9 +147,7 @@
 
    
 
-3. 举出10个常用的标签，5个H5标签.
-
-   div、p、span、h1、input、img、ul、li、form、table、
+3. div、p、span、h1、input、img、ul、li、form、table、
 
    5个H5。nav、article、header、section、footer
 
@@ -156,8 +159,9 @@
 
    http-equiv属性是添加http头部内容，对一些自定义的或者需要额外添加的发送到浏览器中的http头部内容，我们就可以是使用这个属性。
 
-   #### http-equiv、
+   #### http-equiv
 
+   ```html
    <meta http-equiv="参数" content="具体的参数值">
    1、用以说明网页制作所使用的文字以及语言。
    <meta http-equiv="charset" content="iso-8859-1">
@@ -176,6 +180,11 @@
    8、用于设定页面进入和离开时的过渡效果，注意被添加的页面不能在一个frame中。
    <meta http-equiv="page-enter" contect="revealTrans(duration=10,transtion=23)">
    <meta http-equiv="page-exit" contect="revealTrans(duration=20，transtion=6)">
+   
+   ```
+
+   
+
    #### name属性
 
    ```html
