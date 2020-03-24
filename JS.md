@@ -54,8 +54,16 @@
 
    串？
 
-   待完善。。
+   == vs ===
 
+   1. 首先会判断两者类型是否**相同**。相同的话就是比大小了
+   2. 类型不相同的话，那么就会进行类型转换
+   3. 会先判断是否在对比 `null` 和 `undefined`，是的话就会返回 `true`
+   4. 判断两者类型是否为 `string` 和 `number`，是的话就会将字符串转换为 `number`
+   5. 判断其中一方是否为 `boolean`，是的话就会把 `boolean` 转为 `number` 再进行判断
+   6. 判断其中一方是否为 `object` 且另一方为 `string`、`number` 或者 `symbol`，是的话就会把 `object` 转为原始类型再进行判断
+   7. ![img](file:///D:/%E6%A1%8C%E9%9D%A2%E6%96%87%E4%BB%B6/Web%20%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97%E4%B8%8E%E9%AB%98%E9%A2%91%E8%80%83%E9%A2%98%E8%A7%A3%E6%9E%90/%E6%8E%98%E9%87%91%E5%B0%8F%E5%86%8C%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E4%B9%8B%E9%81%93/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E4%B9%8B%E9%81%93/3-JS%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E5%8F%8A%E5%B8%B8%E8%80%83%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89_files/167c4a2627fe55f1)
+   
    
 
 ## CSS
@@ -120,7 +128,9 @@
    3）防止文字环绕
    ```
 
+   ##### IFC
    
+   ![image-20200318180735512](C:\Users\TR\AppData\Roaming\Typora\typora-user-images\image-20200318180735512.png)
 
 ## HTML
 
@@ -258,3 +268,156 @@
 
    缺点：设计复杂，实现麻烦，有些情况下得不偿失
    原文链接：https://blog.csdn.net/seoyundu/article/details/82081265
+
+clone
+
+```js
+function deepClone(obj) {
+  function isObject(o) {
+    return (typeof o === 'object' || typeof o === 'function') && o !== null
+  }
+
+  if (!isObject(obj)) {
+    //throw new Error('非对象')
+     return  obj
+    
+  }
+
+  let isArray = Array.isArray(obj)
+  let newObj = isArray ? [...obj] : { ...obj }
+  Reflect.ownKeys(newObj).forEach(key => {
+    newObj[key] = isObject(obj[key]) ? deepClone(obj[key]) : obj[key]
+  })
+
+  return newObj
+}
+
+let obj = {
+  a: [1, 2, 3],
+  b: {
+    c: 2,
+    d: 3
+  }
+}
+let newObj = deepClone(obj)
+newObj.b.c = 1
+console.log(obj.b.c) // 2
+```
+
+
+
+### Webpack gulp 的区别
+
+## Webpack
+
+[Webpack](https://github.com/webpack/webpack) 是当下最热门的前端资源模块化管理和打包工具。它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分隔，等到实际需要的时候再异步加载。通过 loader的转换，任何形式的资源都可以视作模块，比如 CommonJs 模块、AMD 模块、ES6 模块、CSS、图片、JSON、Coffeescript、LESS 等。
+
+## Gulp和Webpack功能实现对比
+
+简单介绍了一下Gulp和Webpack的概念性的问题和大环境，接下来进入本文的主题，对比一下Gulp和Webpack的优缺点。将从基本概念、启动本地Server、sass/less预编译、模块化开发、文件合并与压缩、mock数据、版本控制、组件控制八个方面对Gulp和Webpack进行对比。
+
+## 基本概念
+
+首先从概念上，我们可以清楚的看出，Gulp和Webpack的侧重点是不同的。
+
+Gulp侧重于前端开发的 **整个过程** 的控制管理（像是流水线），我们可以通过给gulp配置不通的task（通过Gulp中的gulp.task()方法配置，比如启动server、sass/less预编译、文件的合并压缩等等）来让gulp实现不同的功能，从而构建整个前端开发流程。
+
+Webpack有人也称之为 **模块打包机** ，由此也可以看出Webpack更侧重于模块打包，当然我们可以把开发中的所有资源（图片、js文件、css文件等）都可以看成模块，最初Webpack本身就是为前端JS代码打包而设计的，后来被扩展到其他资源的打包处理。Webpack是通过loader（加载器）和plugins（插件）对资源进行处理的。
+
+另外我们知道Gulp是对整个过程进行控制，所以在其配置文件（gulpfile.js）中配置的每一个task对项目中 **该task配置路径下所有的资源** 都可以管理
+
+
+
+### 文件上传
+
+1. 选择文件 file input  accept="image/*"标签
+
+```
+ 客服端
+ FormData数据格式 file
+ ajax请求 POST
+ 传递给服务器 当前文件的BASE64编码（流信息）
+ 服务端
+ 接收到客服端传递的file文件
+ 把文件存储地址返回给客服端
+ 服务端接受到BASE64信息，吧BASE64转换成具体的格式存储
+ 
+```
+
+2. 创建ajax Content
+
+   ```js
+   let fromData = new FromData()
+   Content-type: mutilpart/from-data
+   Content-type: application/json;charset=utf-8
+   
+   fromData.append('chunk',file)//追加
+   new mutilparty.From().parse()
+   
+   
+   function ajax(method, url, data, callback, flag) {
+       //创建ajax对象；
+       var xhr = null;
+       //非IE浏览器
+       if (window.XMLHttpRequest) {
+           xhr = new XMLHttpRequest();
+   
+       } else {
+           //兼容IE
+           xhr = new ActiveXObject('Microso.XMLHttp');
+   
+       }
+       method = method.toUpperCase();
+       if (method == 'GET') {
+           xhr.open(method, url + '?' + data, flag);
+           xhr.send();
+       } else {
+           xhr.open(method, url, flag);
+           xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+           xhr.send(data);
+       }
+       xhr.onreadystatechange = function() {
+   
+           if (xhr.readyState == 4 && xhr.status == 200) {
+   
+               callback(JSON.parse(xhr.response));
+   
+           }
+   
+       }
+   
+   }
+   
+   BASE64
+   let fileRead = new FileReader()
+   fileRead.readAsDataURL()
+   fileRead.onload= function(EV){
+       EV.TARGET.RESULT  //BASE64
+   }
+   
+   
+   ```
+
+   
+
+3. 切片处理 File对象 Blob.slice
+
+   把大文件切片化 ， HTTP可以多个并发传递
+
+    等五个都上传完，在向服务器发送合并图片的请求
+
+   ```
+   xhr.upload.onprogress = setProgress;上传进度
+   function setProgress(event) {
+             // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
+             if (event.lengthComputable) {//
+                 loaded = event.loaded
+                 total = event.total
+                 var complete = (event.loaded / event.total * 100).toFixed(1);
+                 progress.innerHTML = Math.round(complete) + "%";
+                 progress.style.width = complete + '%';
+             }
+   ```
+
+   
+

@@ -255,3 +255,38 @@
 
    缺点：设计复杂，实现麻烦，有些情况下得不偿失
    原文链接：https://blog.csdn.net/seoyundu/article/details/82081265
+   
+6. ### 对象转原始类型
+
+   对象在转换类型的时候，会调用内置的 `[[ToPrimitive]]` 函数，对于该函数来说，算法逻辑一般来说如下：
+
+   - 如果已经是原始类型了，那就不需要转换了
+   - 调用 `x.valueOf()`，如果转换为基础类型，就返回转换的值
+   - 调用 `x.toString()`，如果转换为基础类型，就返回转换的值
+   - 如果都没有返回原始类型，就会报错
+
+   当然你也可以重写 `Symbol.toPrimitive` ，该方法在转原始类型时调用优先级最高。
+
+```js
+let a = {
+  valueOf() {
+    return 0
+  },
+  toString() {
+    return '1'
+  },
+  [Symbol.toPrimitive]() {
+    return 2
+  }
+}
+1 + a // => 3
+```
+
+
+
++ this
+
+![img](file:///D:/%E6%A1%8C%E9%9D%A2%E6%96%87%E4%BB%B6/Web%20%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97%E4%B8%8E%E9%AB%98%E9%A2%91%E8%80%83%E9%A2%98%E8%A7%A3%E6%9E%90/%E6%8E%98%E9%87%91%E5%B0%8F%E5%86%8C%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E4%B9%8B%E9%81%93/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E4%B9%8B%E9%81%93/2-JS%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9%E5%8F%8A%E5%B8%B8%E8%80%83%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E4%B8%80%EF%BC%89_files/16717eaf3383aae8)
+
+
+
